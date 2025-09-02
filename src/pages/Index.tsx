@@ -1,14 +1,560 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Icon from "@/components/ui/icon";
 
-const Index = () => {
+export default function Index() {
+  const [gameScore, setGameScore] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+
+  const questions = [
+    {
+      question: "Что происходит со спросом при увеличении цены на товар?",
+      answers: ["Увеличивается", "Уменьшается", "Не изменяется", "Зависит от товара"],
+      correct: 1
+    },
+    {
+      question: "Какой тип рыночной структуры характеризуется множеством продавцов?",
+      answers: ["Монополия", "Олигополия", "Совершенная конкуренция", "Монопсония"],
+      correct: 2
+    }
+  ];
+
+  const newsData = [
+    {
+      title: "Центробанк повысил ключевую ставку до 21%",
+      description: "Решение принято в связи с ростом инфляции",
+      time: "2 часа назад",
+      category: "Монетарная политика"
+    },
+    {
+      title: "Рост ВВП составил 3.2% в третьем квартале",
+      description: "Показатель превысил прогнозы экспертов",
+      time: "5 часов назад",
+      category: "Макроэкономика"
+    },
+    {
+      title: "Индекс потребительских цен вырос на 0.8%",
+      description: "Основной драйвер роста — продовольственные товары",
+      time: "1 день назад",
+      category: "Инфляция"
+    }
+  ];
+
+  const tutorials = [
+    {
+      title: "Основы спроса и предложения",
+      description: "Изучите базовые принципы рыночного механизма",
+      duration: "45 мин",
+      level: "Начальный",
+      progress: 75,
+      icon: "TrendingUp"
+    },
+    {
+      title: "Эластичность спроса",
+      description: "Как изменения цены влияют на количество спроса",
+      duration: "60 мин",
+      level: "Средний",
+      progress: 30,
+      icon: "Activity"
+    },
+    {
+      title: "Рыночные структуры",
+      description: "Совершенная конкуренция, монополия и олигополия",
+      duration: "90 мин",
+      level: "Продвинутый",
+      progress: 0,
+      icon: "Building2"
+    }
+  ];
+
+  const handleAnswerSelect = (answerIndex: number) => {
+    setSelectedAnswer(answerIndex);
+    if (answerIndex === questions[currentQuestion].correct) {
+      setGameScore(prev => prev + 10);
+    }
+    
+    setTimeout(() => {
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(prev => prev + 1);
+        setSelectedAnswer(null);
+      }
+    }, 1000);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <Icon name="GraduationCap" size={24} className="text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">EconoLearn</h1>
+                <p className="text-sm text-gray-600">Изучай экономику интерактивно</p>
+              </div>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <a href="#news" className="text-gray-700 hover:text-primary transition-colors">Новости</a>
+              <a href="#tutorials" className="text-gray-700 hover:text-primary transition-colors">Учебники</a>
+              <a href="#games" className="text-gray-700 hover:text-primary transition-colors">Игры</a>
+              <a href="#contact" className="text-gray-700 hover:text-primary transition-colors">Контакты</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <div className="animate-fade-in">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">
+              Изучай <span className="text-primary">микроэкономику</span><br />
+              легко и интересно
+            </h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Современная платформа для изучения экономики с интерактивными учебниками, 
+              актуальными новостями и увлекательными играми
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Button size="lg" className="animate-scale-in">
+                <Icon name="Play" size={20} className="mr-2" />
+                Начать обучение
+              </Button>
+              <Button variant="outline" size="lg" className="animate-scale-in">
+                <Icon name="BookOpen" size={20} className="mr-2" />
+                Смотреть учебники
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center animate-fade-in">
+              <div className="text-3xl font-bold text-primary mb-2">24+</div>
+              <div className="text-gray-600">Интерактивных урока</div>
+            </div>
+            <div className="text-center animate-fade-in">
+              <div className="text-3xl font-bold text-secondary mb-2">150+</div>
+              <div className="text-gray-600">Студентов</div>
+            </div>
+            <div className="text-center animate-fade-in">
+              <div className="text-3xl font-bold text-yellow-500 mb-2">98%</div>
+              <div className="text-gray-600">Положительных отзывов</div>
+            </div>
+            <div className="text-center animate-fade-in">
+              <div className="text-3xl font-bold text-green-500 mb-2">12</div>
+              <div className="text-gray-600">Игровых модулей</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* News Section */}
+      <section id="news" className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Последние новости экономики</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Будьте в курсе самых важных экономических событий
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {newsData.map((news, index) => (
+              <Card key={index} className="hover:shadow-lg transition-all duration-300 animate-fade-in border-0 bg-white/80 backdrop-blur-sm">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge variant="secondary" className="bg-primary/10 text-primary">
+                      {news.category}
+                    </Badge>
+                    <span className="text-sm text-gray-500">{news.time}</span>
+                  </div>
+                  <CardTitle className="text-lg hover:text-primary transition-colors cursor-pointer">
+                    {news.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-600">
+                    {news.description}
+                  </CardDescription>
+                  <Button variant="ghost" size="sm" className="mt-3 p-0 h-auto text-primary">
+                    Читать далее <Icon name="ArrowRight" size={16} className="ml-1" />
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-2xl">
+            <div className="flex items-center justify-center">
+              <img 
+                src="/img/50f1e252-2be6-4a20-a844-32cc08d5b5a5.jpg" 
+                alt="Economic news visualization" 
+                className="w-full max-w-md h-48 object-cover rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tutorials Section */}
+      <section id="tutorials" className="py-16 bg-gray-50 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Интерактивные учебники</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Изучайте микроэкономику пошагово с нашими интерактивными материалами
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {tutorials.map((tutorial, index) => (
+              <Card key={index} className="hover:shadow-lg transition-all duration-300 animate-fade-in bg-white">
+                <CardHeader>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Icon name={tutorial.icon as any} size={24} className="text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <Badge variant="outline" className="mb-1">
+                        {tutorial.level}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardTitle className="text-lg">{tutorial.title}</CardTitle>
+                  <CardDescription>{tutorial.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">Прогресс</span>
+                      <span className="font-medium">{tutorial.progress}%</span>
+                    </div>
+                    <Progress value={tutorial.progress} className="w-full" />
+                    
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Icon name="Clock" size={16} className="mr-1" />
+                        {tutorial.duration}
+                      </div>
+                      <Button size="sm" variant={tutorial.progress > 0 ? "default" : "outline"}>
+                        {tutorial.progress > 0 ? "Продолжить" : "Начать"}
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Games Section */}
+      <section id="games" className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Экономические игры</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Закрепите знания с помощью интерактивных игр и викторин
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl flex items-center justify-center">
+                  <Icon name="Trophy" size={28} className="mr-2 text-yellow-500" />
+                  Викторина по микроэкономике
+                </CardTitle>
+                <CardDescription className="text-lg">
+                  Проверьте свои знания и заработайте баллы!
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="text-lg px-3 py-1">
+                      Счёт: {gameScore} баллов
+                    </Badge>
+                    <Badge variant="outline" className="text-lg px-3 py-1">
+                      Вопрос {currentQuestion + 1} из {questions.length}
+                    </Badge>
+                  </div>
+
+                  {currentQuestion < questions.length && (
+                    <div className="space-y-6">
+                      <div className="p-6 bg-white rounded-lg border">
+                        <h4 className="text-xl font-semibold mb-4">
+                          {questions[currentQuestion].question}
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {questions[currentQuestion].answers.map((answer, index) => (
+                            <Button
+                              key={index}
+                              variant={
+                                selectedAnswer === index
+                                  ? index === questions[currentQuestion].correct
+                                    ? "default"
+                                    : "destructive"
+                                  : "outline"
+                              }
+                              className={`text-left justify-start h-auto py-3 px-4 ${
+                                selectedAnswer !== null && index === questions[currentQuestion].correct
+                                  ? "bg-green-500 hover:bg-green-600 text-white"
+                                  : ""
+                              }`}
+                              onClick={() => handleAnswerSelect(index)}
+                              disabled={selectedAnswer !== null}
+                            >
+                              {answer}
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentQuestion >= questions.length && (
+                    <div className="text-center p-8 bg-white rounded-lg">
+                      <Icon name="PartyPopper" size={48} className="mx-auto mb-4 text-yellow-500" />
+                      <h4 className="text-2xl font-bold mb-2">Поздравляем!</h4>
+                      <p className="text-lg text-gray-600 mb-4">
+                        Вы набрали {gameScore} баллов из {questions.length * 10} возможных
+                      </p>
+                      <Button 
+                        onClick={() => {
+                          setCurrentQuestion(0);
+                          setGameScore(0);
+                          setSelectedAnswer(null);
+                        }}
+                      >
+                        Играть снова
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="mt-8 flex justify-center">
+              <img 
+                src="/img/a0a13657-6a2d-45e0-b7b4-05bf4b547b72.jpg" 
+                alt="Economics learning game" 
+                className="w-full max-w-lg h-48 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Economic Chart Section */}
+      <section className="py-16 bg-gray-50 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Экономические показатели</h3>
+            <p className="text-gray-600">Визуализация ключевых экономических данных</p>
+          </div>
+
+          <Tabs defaultValue="demand" className="max-w-4xl mx-auto">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="demand">Спрос и предложение</TabsTrigger>
+              <TabsTrigger value="inflation">Инфляция</TabsTrigger>
+              <TabsTrigger value="gdp">ВВП</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="demand" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Кривая спроса и предложения</CardTitle>
+                  <CardDescription>
+                    Классическая модель взаимодействия спроса и предложения
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-64 bg-gradient-to-br from-blue-50 to-green-50 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <Icon name="TrendingUp" size={48} className="text-primary mx-auto mb-4" />
+                      <p className="text-gray-600">Интерактивный график спроса и предложения</p>
+                      <p className="text-sm text-gray-500 mt-2">Перетаскивайте точки для изменения параметров</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="inflation" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Динамика инфляции</CardTitle>
+                  <CardDescription>
+                    Изменение уровня цен за последние 12 месяцев
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-64 bg-gradient-to-r from-red-50 to-yellow-50 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <Icon name="BarChart3" size={48} className="text-red-500 mx-auto mb-4" />
+                      <p className="text-gray-600">График динамики инфляции</p>
+                      <div className="flex items-center justify-center mt-4 space-x-4">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-red-500">5.8%</div>
+                          <div className="text-sm text-gray-500">Текущий уровень</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-500">4.5%</div>
+                          <div className="text-sm text-gray-500">Целевой</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="gdp" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Рост ВВП</CardTitle>
+                  <CardDescription>
+                    Квартальная динамика валового внутреннего продукта
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-64 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <Icon name="LineChart" size={48} className="text-green-500 mx-auto mb-4" />
+                      <p className="text-gray-600">График роста ВВП по кварталам</p>
+                      <div className="grid grid-cols-4 gap-4 mt-4">
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-green-500">+2.1%</div>
+                          <div className="text-xs text-gray-500">Q1</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-green-500">+2.8%</div>
+                          <div className="text-xs text-gray-500">Q2</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-green-600">+3.2%</div>
+                          <div className="text-xs text-gray-500">Q3</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-gray-400">—</div>
+                          <div className="text-xs text-gray-500">Q4</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-3xl font-bold text-gray-900 mb-6">Свяжитесь с нами</h3>
+            <p className="text-gray-600 mb-8">
+              Есть вопросы об изучении экономики? Мы готовы помочь!
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                  <Icon name="Mail" size={24} className="text-primary" />
+                </div>
+                <h4 className="font-semibold mb-1">Email</h4>
+                <p className="text-gray-600">info@econolearn.ru</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-12 h-12 bg-secondary/10 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                  <Icon name="MessageSquare" size={24} className="text-secondary" />
+                </div>
+                <h4 className="font-semibold mb-1">Telegram</h4>
+                <p className="text-gray-600">@econolearn_bot</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-12 h-12 bg-yellow-500/10 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                  <Icon name="Users" size={24} className="text-yellow-600" />
+                </div>
+                <h4 className="font-semibold mb-1">Сообщество</h4>
+                <p className="text-gray-600">Присоединяйтесь</p>
+              </div>
+            </div>
+            
+            <Button size="lg" className="animate-bounce-subtle">
+              <Icon name="Send" size={20} className="mr-2" />
+              Написать нам
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-4">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                  <Icon name="GraduationCap" size={20} className="text-white" />
+                </div>
+                <h4 className="text-xl font-bold">EconoLearn</h4>
+              </div>
+              <p className="text-gray-400">
+                Современная платформа для изучения микроэкономики
+              </p>
+            </div>
+            
+            <div>
+              <h5 className="font-semibold mb-4">Обучение</h5>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#tutorials" className="hover:text-white transition-colors">Учебники</a></li>
+                <li><a href="#games" className="hover:text-white transition-colors">Игры</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Тесты</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h5 className="font-semibold mb-4">Информация</h5>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#news" className="hover:text-white transition-colors">Новости</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Блог</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h5 className="font-semibold mb-4">Поддержка</h5>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#contact" className="hover:text-white transition-colors">Контакты</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Помощь</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">О нас</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 EconoLearn. Все права защищены.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-};
-
-export default Index;
+}
