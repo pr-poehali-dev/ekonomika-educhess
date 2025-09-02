@@ -32,49 +32,49 @@ export default function Index() {
 
   const newsData = [
     {
-      title: "Центробанк повысил ключевую ставку до 21%",
-      description: "Решение принято в связи с ростом инфляции",
+      title: "Почему подорожали продукты в декабре?",
+      description: "Разбираем причины роста цен и как это влияет на бюджет",
       time: "2 часа назад",
-      category: "Монетарная политика"
+      category: "Личные финансы"
     },
     {
-      title: "Рост ВВП составил 3.2% в третьем квартале",
-      description: "Показатель превысил прогнозы экспертов",
+      title: "5 способов сэкономить на коммунальных платежах",
+      description: "Практические советы, которые помогут снизить расходы",
       time: "5 часов назад",
-      category: "Макроэкономика"
+      category: "Полезные советы"
     },
     {
-      title: "Индекс потребительских цен вырос на 0.8%",
-      description: "Основной драйвер роста — продовольственные товары",
+      title: "Как выбрать выгодный вклад в 2025 году",
+      description: "Обзор банковских продуктов и рекомендации экспертов",
       time: "1 день назад",
-      category: "Инфляция"
+      category: "Инвестиции"
     }
   ];
 
   const tutorials = [
     {
-      title: "Основы спроса и предложения",
-      description: "Изучите базовые принципы рыночного механизма",
-      duration: "45 мин",
-      level: "Начальный",
+      title: "Личный бюджет: с чего начать",
+      description: "Учимся планировать доходы и расходы правильно",
+      duration: "30 мин",
+      level: "Новичок",
       progress: 75,
+      icon: "Wallet"
+    },
+    {
+      title: "Почему дорожает хлеб?",
+      description: "Простыми словами о том, как работает инфляция",
+      duration: "20 мин",
+      level: "Любознательное",
+      progress: 30,
       icon: "TrendingUp"
     },
     {
-      title: "Эластичность спроса",
-      description: "Как изменения цены влияют на количество спроса",
-      duration: "60 мин",
-      level: "Средний",
-      progress: 30,
-      icon: "Activity"
-    },
-    {
-      title: "Рыночные структуры",
-      description: "Совершенная конкуренция, монополия и олигополия",
-      duration: "90 мин",
-      level: "Продвинутый",
+      title: "Как не потерять деньги на вкладах",
+      description: "Основы инвестирования для начинающих",
+      duration: "45 мин",
+      level: "Практичное",
       progress: 0,
-      icon: "Building2"
+      icon: "PiggyBank"
     }
   ];
 
@@ -93,7 +93,7 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 economic-pattern">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
         <div className="container mx-auto px-4 py-3">
@@ -113,15 +113,15 @@ export default function Index() {
                         <Icon name="GraduationCap" size={24} className="text-white" />
                       </div>
                       <div>
-                        <SheetTitle className="text-xl font-bold text-gray-900">EconoLearn</SheetTitle>
-                        <p className="text-sm text-gray-600">Навигация по сайту</p>
+                        <SheetTitle className="text-xl font-bold text-gray-900">EconoHub</SheetTitle>
+                        <p className="text-sm text-gray-600">Экономика для всех</p>
                       </div>
                     </div>
                   </SheetHeader>
                   
                   <nav className="space-y-2">
                     <div className="space-y-1">
-                      <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Разделы</h3>
+                      <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Основные разделы</h3>
                       
                       <a 
                         href="#news" 
@@ -133,7 +133,7 @@ export default function Index() {
                         </div>
                         <div>
                           <div className="font-medium text-gray-900">Новости</div>
-                          <div className="text-sm text-gray-500">Актуальные события экономики</div>
+                          <div className="text-sm text-gray-500">События, влияющие на ваш кошелёк</div>
                         </div>
                       </a>
                       
@@ -146,8 +146,8 @@ export default function Index() {
                           <Icon name="BookOpen" size={20} className="text-green-600" />
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">Учебники</div>
-                          <div className="text-sm text-gray-500">Интерактивные материалы</div>
+                          <div className="font-medium text-gray-900">Обучение</div>
+                          <div className="text-sm text-gray-500">Простые уроки экономики</div>
                         </div>
                       </a>
                       
@@ -160,8 +160,22 @@ export default function Index() {
                           <Icon name="Gamepad2" size={20} className="text-yellow-600" />
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">Игры</div>
-                          <div className="text-sm text-gray-500">Викторины и обучающие игры</div>
+                          <div className="font-medium text-gray-900">Инструменты</div>
+                          <div className="text-sm text-gray-500">Калькуляторы и тесты</div>
+                        </div>
+                      </a>
+                      
+                      <a 
+                        href="#contact" 
+                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
+                          <Icon name="Wallet" size={20} className="text-orange-600" />
+                        </div>
+                        <div>
+                          <div className="font-medium text-gray-900">Личные финансы</div>
+                          <div className="text-sm text-gray-500">Управление деньгами</div>
                         </div>
                       </a>
                       
@@ -174,8 +188,8 @@ export default function Index() {
                           <Icon name="MessageSquare" size={20} className="text-purple-600" />
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">Контакты</div>
-                          <div className="text-sm text-gray-500">Связь с нами</div>
+                          <div className="font-medium text-gray-900">Сообщество</div>
+                          <div className="text-sm text-gray-500">Обсуждения и советы</div>
                         </div>
                       </a>
                     </div>
@@ -208,7 +222,7 @@ export default function Index() {
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                   <Icon name="GraduationCap" size={18} className="text-white" />
                 </div>
-                <h1 className="text-xl font-bold text-gray-900 hidden sm:block">EconoLearn</h1>
+                <h1 className="text-xl font-bold text-gray-900 hidden sm:block">EconoHub</h1>
               </div>
             </div>
 
@@ -268,21 +282,21 @@ export default function Index() {
         <div className="container mx-auto text-center">
           <div className="animate-fade-in">
             <h2 className="text-5xl font-bold text-gray-900 mb-6">
-              Изучай <span className="text-primary">микроэкономику</span><br />
-              легко и интересно
+              Экономика <span className="text-primary">для каждого</span><br />
+              просто и понятно
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Современная платформа для изучения экономики с интерактивными учебниками, 
-              актуальными новостями и увлекательными играми
+              Узнавайте, как экономика влияет на вашу жизнь. Обучение, новости, 
+              инструменты для управления личными финансами и многое другое
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Button size="lg" className="animate-scale-in">
                 <Icon name="Play" size={20} className="mr-2" />
-                Начать обучение
+                Начать изучение
               </Button>
               <Button variant="outline" size="lg" className="animate-scale-in">
                 <Icon name="BookOpen" size={20} className="mr-2" />
-                Смотреть учебники
+                Личные финансы
               </Button>
             </div>
           </div>
@@ -294,20 +308,20 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center animate-fade-in">
-              <div className="text-3xl font-bold text-primary mb-2">24+</div>
-              <div className="text-gray-600">Интерактивных урока</div>
+              <div className="text-3xl font-bold text-primary mb-2">50+</div>
+              <div className="text-gray-600">Практических гайдов</div>
             </div>
             <div className="text-center animate-fade-in">
-              <div className="text-3xl font-bold text-secondary mb-2">150+</div>
-              <div className="text-gray-600">Студентов</div>
+              <div className="text-3xl font-bold text-secondary mb-2">5K+</div>
+              <div className="text-gray-600">Активных пользователей</div>
             </div>
             <div className="text-center animate-fade-in">
               <div className="text-3xl font-bold text-yellow-500 mb-2">98%</div>
               <div className="text-gray-600">Положительных отзывов</div>
             </div>
             <div className="text-center animate-fade-in">
-              <div className="text-3xl font-bold text-green-500 mb-2">12</div>
-              <div className="text-gray-600">Игровых модулей</div>
+              <div className="text-3xl font-bold text-green-500 mb-2">25</div>
+              <div className="text-gray-600">Полезных инструментов</div>
             </div>
           </div>
         </div>
@@ -317,15 +331,15 @@ export default function Index() {
       <section id="news" className="py-16 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Последние новости экономики</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Новости и полезные советы</h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Будьте в курсе самых важных экономических событий
+              Узнавайте о том, что влияет на ваши деньги и как принимать верные решения
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {newsData.map((news, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300 animate-fade-in border-0 bg-white/80 backdrop-blur-sm">
+              <Card key={index} className="floating-card hover:shadow-lg transition-all duration-300 animate-fade-in border-0 glass-effect">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="secondary" className="bg-primary/10 text-primary">
@@ -349,13 +363,25 @@ export default function Index() {
             ))}
           </div>
 
-          <div className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-2xl">
-            <div className="flex items-center justify-center">
-              <img 
-                src="/img/50f1e252-2be6-4a20-a844-32cc08d5b5a5.jpg" 
-                alt="Economic news visualization" 
-                className="w-full max-w-md h-48 object-cover rounded-lg"
-              />
+          <div className="mt-12 p-8 economic-gradient rounded-2xl text-white">
+            <div className="text-center">
+              <h4 className="text-2xl font-bold mb-4">💡 А вы знали?</h4>
+              <p className="text-lg opacity-90 mb-6">
+                Среднестатистическая российская семья тратит 30% дохода на еду, 
+                25% на жильё и коммунальные услуги, а 15% откладывает
+              </p>
+              <div className="grid md:grid-cols-2 gap-6 mt-6">
+                <img 
+                  src="/img/5a6bc4c3-a32d-41f6-9639-761d826f8c29.jpg" 
+                  alt="People and economics" 
+                  className="w-full h-32 object-cover rounded-lg"
+                />
+                <img 
+                  src="/img/3daffeb8-f4a1-4d3b-ac71-96a51e76d45d.jpg" 
+                  alt="Finance tools" 
+                  className="w-full h-32 object-cover rounded-lg"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -365,9 +391,9 @@ export default function Index() {
       <section id="tutorials" className="py-16 bg-gray-50 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Интерактивные учебники</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Обучающие материалы</h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Изучайте микроэкономику пошагово с нашими интерактивными материалами
+              Простые уроки о том, как работает экономика в повседневной жизни
             </p>
           </div>
 
